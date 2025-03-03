@@ -1,9 +1,8 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
-from tasks.forms import TaskForm,TaskModelForm,TaskDetailModelForm
-from tasks.models import Task,TaskDetails,Project
-from datetime import date
-from django.db.models import Q, Count, Min, Max, Avg
+from tasks.forms import TaskModelForm,TaskDetailModelForm
+from tasks.models import Task,Project
+from django.db.models import Q, Count
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test,login_required,permission_required
 from users.views import is_admin
@@ -12,16 +11,6 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin
 from django.views.generic.base import ContextMixin
 from django.views.generic import ListView,DetailView,UpdateView,TemplateView
-
-# Class based view re-use example
-class Greetings(View):
-    greetings = 'Hello Everyone'
-    def get(self,request):
-        return HttpResponse(self.greetings)
-    
-class HiGreetings(Greetings):
-    greetings = 'Hi everyone!'
-
 
 # Filter manager & employee
 def is_manager(user):
