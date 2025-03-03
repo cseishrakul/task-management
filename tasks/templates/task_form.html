@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/output.css' %}" />
+    <title>Form</title>
+  </head>
+  <body>
+    <div class="mt-8 w-1/2 mx-auto">
+      <h1 class="text-center text-2xl font-bold">Task Form</h1>
+      <hr />
+      <div class="mt-2">
+        {% if messages %} {% for message in messages %}
+        <div
+          class="px-2 py-1 {% if message.tags == 'success' %} bg-green-500 {% endif %}"
+        >
+          {{message}}
+        </div>
+        {% endfor %} {% endif %}
+      </div>
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %} {% comment %} <label for="">Title</label>
+        <input type="text" name="title" id="" />
+        <label for="">Number</label>
+        <input type="number" name="number" id="" /> {% endcomment %}
+        {{task_form}} {{task_detail_form}}
+
+        <button
+          class="bg-rose-600 px-3 py-2 text-white rounded-lg my-2 w-full"
+          type="submit"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>Document</title>
+  </head>
+  <body>
+    {% comment %}
+    <p>dfdf</p>
+    <img src="{% static 'images/1.jpg' %}" alt="" /> {% endcomment %} 
+    {% with count=0 %}
+        {% for name in names %} 
+            {% if not name == 'Deep' %}
+                <p>{{name}}</p>
+            {% endif %}
+            {{count|add:"1"}}
+        {% endfor %}
+        {{count}}
+    {% endwith %}
+    <br/>
+    {{count}}
+  </body>
+</html>

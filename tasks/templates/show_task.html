@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="">
+      {% comment %} {% for task in tasks %}
+      <ul>
+        <li>{{task.title}}</li>
+      </ul>
+      {% endcomment %} {% comment %}
+      <p class=""><b>Description:</b> {{task.description}}</p>
+      {% endcomment %} {% comment %} {% endfor %}
+      <p><b>Task 3: </b> {{task3}}</p>
+      <p><b>First Task : </b> {{f_task}}</p>
+      {% endcomment %} {% comment %} Filter Data {% endcomment %} {% comment %}
+      {% for task in tasks %}
+      <ul>
+        <li>{{task}}</li>
+        {% comment %}
+        <li>{{task.priority}}</li>
+        {% endcomment %} {% comment %}
+      </ul>
+      {% endfor %} {% endcomment %} {% comment %} {{tasks}} {% endcomment %} 
+       
+      
+      {% comment %} Related Data Queries {% endcomment %}
+      <div class="">
+        {% comment %} {% for project in tasks %}
+            <ul>
+                <li> {{project}} </li>
+                {% for task in project.task_set.all %}
+                    <li> <b>Task</b> {{task.title}} </li>
+                {% endfor %}
+                
+            </ul>
+        {% endfor %} {% endcomment %}
+
+        {% comment %} {% for task in tasks %}
+            <ul>
+                <li> {{task}} </li>
+                {% for emp in task.assigned_to.all %}
+                    <li> {{emp}} </li>
+                {% endfor %}
+            </ul>
+        {% endfor %} {% endcomment %}
+
+        {% comment %} <p class=""> {{task_count}} </p> {% endcomment %}
+
+        {% for project in projects %}
+            <ul>
+                <li> {{project}} </li>
+                <li> {{project.num_task}} </li>
+            </ul>
+        {% endfor %}
+
+
+      </div>
+    </div>
+  </body>
+</html>

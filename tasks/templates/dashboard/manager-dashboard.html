@@ -1,0 +1,56 @@
+{% extends "dashboard/dashboard.html" %} {% block tasks %} {% block title %}
+Manager {% endblock title %}
+<!-- Task Table -->
+<div class="mt-2">
+  {% if messages %} {% for message in messages %}
+  <div
+    class="px-2 py-1 text-white rounded-md {% if message.tags == 'success' %} bg-green-600 {% elif message.tags == 'error' %} bg-rose-600 {% endif %}"
+  >
+    {{ message }}
+  </div>
+  {% endfor %} {% endif %}
+</div>
+<div class="bg-white rounded-xl shadow-sm">
+  <div
+    class="grid grid-cols-4 p-4 border-b border-gray-100 text-sm text-gray-500"
+  >
+    <div class="">Task Title</div>
+    <div class="">Priority</div>
+    <div class="">Team</div>
+    <div class="">Created At</div>
+  </div>
+  <!-- Task Item -->
+  {% for task in tasks %}
+  <div class="divide-y divide-gray-100">
+    <div class="grid grid-cols-4 p-4 gap-4 items-center">
+      <div class="flex items-center gap-2">
+        <div class="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+        <div class="">
+          <a href="{% url 'task-details' task.id %}">{{task.title}}</a>
+          <p class="mb-4"><b>Status:</b> {{task.status}}</p>
+        </div>
+      </div>
+      <div class="">
+        <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm"
+          >{{task.details.get_priority_display}}</span
+        >
+      </div>
+      <div class="flex -space-x-2">
+        {% for emp in task.assigned_to.all %}
+        <div
+          class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm border-2 border-white"
+        >
+          {{emp.first_name|slice:':2'}}
+        </div>
+        {% endfor %}
+      </div>
+      <div class="">
+        <span class="text-gray-500">{{task.created_at|timesince}}</span>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  <!-- End Task item -->
+</div>
+<!-- End Task Table -->
+{% endblock tasks %}
